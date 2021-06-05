@@ -4,6 +4,7 @@ class Parser {
 	 */
 	parse(string) {
 		this._string = string
+		return this.Program();
 	}
 
 	/** Main entry point
@@ -14,7 +15,10 @@ class Parser {
 	 */
 
 	Program() {
-		return this.NumericLiteral();
+		return {
+			type: 'Program',
+			body: this.NumericLiteral()
+		}
 	}
 
 	/**
