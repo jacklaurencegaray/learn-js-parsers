@@ -1,40 +1,45 @@
-const { Tokenizer } = require("./Tokernizer")
+const { Tokenizer } = require('./Tokernizer')
 
 class Parser {
- /**
-  * Parses a string into an AST
-  */
- parse(string) {
-  this._string = string
-  return this.Program()
- }
+    constructor() {
+        this._string = ''
+        this._tokenizer = new Tokenizer()
+    }
 
- /** Main entry point
-  *
-  * Program
-  * 	: NumericLiteral
-  * ;
-  */
+    /**
+     * Parses a string into an AST
+     */
+    parse(string) {
+        this._string = string
+        return this.Program()
+    }
 
- Program() {
-  return {
-   type: "Program",
-   body: this.NumericLiteral(),
-  }
- }
+    /** Main entry point
+     *
+     * Program
+     * 	: NumericLiteral
+     * ;
+     */
 
- /**
-  * NumericLiteral
-  * 	: NUMBER
-  */
- NumericLiteral() {
-  return {
-   type: "NumericLiteral",
-   value: Number(this._string),
-  }
- }
+    Program() {
+        return {
+            type: 'Program',
+            body: this.NumericLiteral(),
+        }
+    }
+
+    /**
+     * NumericLiteral
+     * 	: NUMBER
+     */
+    NumericLiteral() {
+        return {
+            type: 'NumericLiteral',
+            value: Number(this._string),
+        }
+    }
 }
 
 module.exports = {
- Parser,
+    Parser,
 }
