@@ -2,9 +2,18 @@ const Spec = [
     // Numbers
     [/^\d+/, 'NUMBER'],
 
+    // Comments:
+    // Skip single-line comments
+    [/^\/\/.*/, null],
+    // Skip multi-line comments
+    [/^\/\*[\s\S]*?\*\//, null],
+
     // Strings
     [/"[^"]*"/, 'STRING'],
     [/'[^']*'/, 'STRING'],
+
+    // Whitespaces
+    [/^\s+/, null],
 ]
 
 /**
@@ -39,6 +48,10 @@ class Tokenizer {
 
             if (tokenValue == null) {
                 continue
+            }
+
+            if (tokenType == null) {
+                return this.getNextToken()
             }
 
             return {
